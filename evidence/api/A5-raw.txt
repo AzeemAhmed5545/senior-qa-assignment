@@ -1,0 +1,23 @@
+# A5  captured 2026-10-30 13:56:24 +0530
+# curl -X GET https://automationexercise.com/api/searchProduct
+
+HTTP/1.1 200 OK
+Date: Fri, 30 Oct 2026 08:27:17 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 73
+Connection: keep-alive
+vary: Accept,Cookie,Accept-Encoding
+referrer-policy: same-origin
+x-frame-options: DENY
+x-content-type-options: nosniff
+allow: DELETE, GET, OPTIONS, PUT, POST
+x-powered-by: Phusion Passenger(R) 6.2.1
+status: 200 OK
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=SfEkJ3mTc0H5QRiN3e5zg5F0oqgAfUEvCy15cP0p%2FAUVHBy718Wke9KoO2YbfgQJ7OACixj%2FXiYs14JQ1AMZK1nwCxTBoxnXtyIiFRyCPAfND8ZlECzT2me%2BoW4raGk0KOkwHpYiLG8N"}]}
+Server: cloudflare
+cf-cache-status: DYNAMIC
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+CF-RAY: a5290a37d9c9b2fa-CMB
+alt-svc: h3=":443"; ma=86400
+
+{"responseCode": 405, "message": "This request method is not supported."}

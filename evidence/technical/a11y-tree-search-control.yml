@@ -1,0 +1,9 @@
+# Chrome accessibility tree (Playwright MCP snapshot), Chrome 156.0.8078.74, 2026-10-30
+# Page: https://automationexercise.com/products - search area
+# Read: the button's accessible name is EMPTY (button "") -> DEF-02 / TR-20.
+#       the field's only name is its placeholder "Search Product" -> IMP-07.
+
+- generic [ref=f104e44]:
+  - img "Website for practice" [ref=f104e45]
+  - textbox "Search Product" [ref=f104e46]
+  - button "" [active] [ref=f104e47] [cursor=pointer]

@@ -1,0 +1,20 @@
+# Chrome accessibility tree (Playwright MCP snapshot), Chrome 156.0.8078.74, 2026-10-30
+# Page: https://automationexercise.com/product_details/1 - product information block
+# Read: the quantity input is 'spinbutton' with NO name (only its value "1"); the "Quantity:" text is a separate,
+#       unlinked element -> DEF-03 / TR-21. Markup: <label>Quantity:</label> <input type="number" id="quantity" ...> (no for=)
+
+- generic [ref=f115e102]:
+  - img "ecommerce website products" [ref=f115e103]
+  - heading "Blue Top" [level=2] [ref=f115e104]
+  - paragraph [ref=f115e105]: "Category: Women > Tops"
+  - img "ecommerce website products" [ref=f115e106]
+  - generic [ref=f115e107]:
+    - generic [ref=f115e108]: Rs. 500
+    - generic [ref=f115e109]: "Quantity:"
+    - spinbutton [ref=f115e110]: "1"
+    - button " Add to cart" [ref=f115e111] [cursor=pointer]:
+      - generic [ref=f115e112]: 
+      - text: Add to cart
+  - paragraph [ref=f115e113]: "Availability: In Stock"
+  - paragraph [ref=f115e114]: "Condition: New"
+  - paragraph [ref=f115e115]: "Brand: Polo"

@@ -1,0 +1,5 @@
+# Tool output and local settings - not assignment deliverables
+node_modules/
+.playwright-mcp/
+.claude/
+__pycache__/

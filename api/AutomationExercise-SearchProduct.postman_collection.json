@@ -1,0 +1,181 @@
+{
+  "info": {
+    "name": "Automation Exercise - Search Product API",
+    "description": "Section 2 API checks for the Senior QA assignment.\n\nDocs: https://automationexercise.com/api_list (API 5: POST To Search Product, API 6: POST To Search Product without search_product parameter).\n\nA1-A3 are the cases the brief requires. A4-A6 are extra cases.\n\nTests marked 'Docs:' check documented behaviour. Tests marked 'Observed:' record actual behaviour where the docs are silent or ambiguous; they describe the current state and are not a claim that it is correct.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://automationexercise.com" }
+  ],
+  "item": [
+    {
+      "name": "A1 - Search for 'top'",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/searchProduct",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [ { "key": "search_product", "value": "top" } ]
+        },
+        "description": "Brief: a search for top. Docs (API 5): Response Code 200, Response JSON: Searched products list."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "pm.test('HTTP status is 200', () => pm.response.to.have.status(200));",
+              "pm.test('Docs: body responseCode is 200', () => pm.expect(body.responseCode).to.eql(200));",
+              "pm.test('Docs: products list is returned and not empty', () => {",
+              "  pm.expect(body.products).to.be.an('array').that.is.not.empty;",
+              "});",
+              "pm.test('Every product has id, name, price, brand, category', () => {",
+              "  body.products.forEach(p => pm.expect(p).to.include.all.keys('id', 'name', 'price', 'brand', 'category'));",
+              "});",
+              "const blueTop = body.products.find(p => p.id === 1);",
+              "pm.test('Blue Top (id 1) is in the results at Rs. 500', () => {",
+              "  pm.expect(blueTop, 'id 1 present').to.exist;",
+              "  pm.expect(blueTop.name).to.eql('Blue Top');",
+              "  pm.expect(blueTop.price).to.eql('Rs. 500');",
+              "});",
+              "const nameMatches = body.products.filter(p => /top/i.test(p.name)).length;",
+              "console.log(`Products returned: ${body.products.length}; name contains 'top': ${nameMatches}; others match on category`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "A2 - Search with no matching products",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/searchProduct",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [ { "key": "search_product", "value": "zzzznotfound123" } ]
+        },
+        "description": "Brief: a search term with no matching products. The docs do not describe the no-match response."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "pm.test('HTTP status is 200', () => pm.response.to.have.status(200));",
+              "pm.test('Observed: body responseCode is 200 (docs do not define no-match)', () => pm.expect(body.responseCode).to.eql(200));",
+              "pm.test('Observed: products is an empty array', () => pm.expect(body.products).to.be.an('array').that.is.empty);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "A3 - search_product parameter omitted",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/searchProduct",
+        "description": "Brief: a request with the required search parameter omitted. No body is sent.\n\nDocs (API 6): Response Code: 400, Response Message: Bad request, search_product parameter is missing in POST request.\n\nAmbiguity: the docs do not say whether 'Response Code' means the HTTP status or the responseCode field in the JSON body."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "pm.test('Docs: body responseCode is 400', () => pm.expect(body.responseCode).to.eql(400));",
+              "pm.test('Docs: message says search_product is missing', () => {",
+              "  pm.expect(body.message).to.eql('Bad request, search_product parameter is missing in POST request.');",
+              "});",
+              "pm.test(`Observed: HTTP status is ${pm.response.code}, not 400 (ambiguity, see description)`, () => {",
+              "  pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "A4 - Extra: empty search value",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/searchProduct",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [ { "key": "search_product", "value": "" } ]
+        },
+        "description": "Extra case: parameter present but blank. Not described in the docs."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "pm.test('HTTP status is 200', () => pm.response.to.have.status(200));",
+              "pm.test('Observed: body responseCode is 200', () => pm.expect(body.responseCode).to.eql(200));",
+              "console.log(`Products returned for blank search: ${(body.products || []).length}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "A5 - Extra: wrong method (GET)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/searchProduct",
+        "description": "Extra case: the docs list POST only. Checks how an unsupported method is handled."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "pm.test('Observed: body responseCode is 405', () => pm.expect(body.responseCode).to.eql(405));",
+              "pm.test('Observed: message says the method is not supported', () => {",
+              "  pm.expect(body.message).to.eql('This request method is not supported.');",
+              "});",
+              "console.log(`HTTP status: ${pm.response.code}`);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "A6 - Extra: wrong parameter name",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/searchProduct",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [ { "key": "other", "value": "x" } ]
+        },
+        "description": "Extra variant of A3: a body is sent, but without search_product."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "pm.test('Docs: body responseCode is 400', () => pm.expect(body.responseCode).to.eql(400));",
+              "pm.test('Docs: message says search_product is missing', () => {",
+              "  pm.expect(body.message).to.include('search_product parameter is missing');",
+              "});",
+              "console.log(`HTTP status: ${pm.response.code}`);"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

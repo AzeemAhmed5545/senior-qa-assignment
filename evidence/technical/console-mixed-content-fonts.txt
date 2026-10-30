@@ -1,0 +1,30 @@
+# Console errors and font loading - product page  captured 2026-10-30 14:45:15 +0530
+# Chrome (Playwright), https://automationexercise.com/product_details/1
+
+## Console errors (3)
+[ERROR] Mixed Content: The page at 'https://automationexercise.com/product_details/1' was loaded over HTTPS, but requested an insecure stylesheet 'http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100'. This request has been blocked; the content must be served over HTTPS.
+[ERROR] Mixed Content: ... insecure stylesheet 'http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700'. This request has been blocked; ...
+[ERROR] Mixed Content: ... insecure stylesheet 'http://fonts.googleapis.com/css?family=Abel'. This request has been blocked; ...
+
+## Source: static/css/main.css (first 8 lines)
+     1	﻿
+     2	/*************************
+     3	*******Typography******
+     4	**************************/
+     5	@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
+     6	@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
+     7	@import url(http://fonts.googleapis.com/css?family=Abel);
+     8	
+
+## Pages including main.css
+/: 1
+/products: 1
+/product_details/1: 1
+/view_cart: 1
+/login: 1
+
+## Font check in browser (document.fonts + render width test)
+Font faces defined for Roboto / Open Sans / Abel: none (3 faces on page in total, none of these)
+Computed font-family on body and product heading: 'Roboto, sans-serif'
+Text styled 'Roboto, monospace' renders same width as 'monospace' -> Roboto is NOT available; browser falls back to default sans-serif
+Note: document.fonts.check('16px Roboto') returned true, but that method also returns true when no such font is defined, so it is not evidence of loading.

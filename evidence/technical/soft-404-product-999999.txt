@@ -1,0 +1,44 @@
+# Soft 404 check  captured 2026-10-30 14:44:39 +0530
+# curl -s -i https://automationexercise.com/product_details/999999
+
+HTTP/1.1 200 OK
+Date: Fri, 30 Oct 2026 09:15:34 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+vary: Cookie,Accept-Encoding
+referrer-policy: same-origin
+x-frame-options: DENY
+x-content-type-options: nosniff
+x-powered-by: Phusion Passenger(R) 6.2.1
+Set-Cookie: csrftoken=hM8XrpMh7N9HagHaOI9zmQV36UIEgCPaWMA6aenybQ5AjDqaMMo23KA0mnhiX1eX; expires=Fri, 29 Oct 2027 09:15:34 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+status: 200 OK
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=mKuGUXMdRdqvaHhzJpCY5HLU%2BxjxPBw%2B3bI9vCp3lAIE9wIXBWgGnf2nmhMWnY7Qb3Hzwfz%2B90QAgQIdG932hnz%2BRE7k0fOCaVNSLCY%2FsJieHtXfjt%2Fnye3lMC2XI8Wu8%2FSndrhPgftk"}]}
+Server: cloudflare
+cf-cache-status: DYNAMIC
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+CF-RAY: a52950f21dd934bc-CMB
+alt-svc: h3=":443"; ma=86400
+
+--- product-information block ---
+							<div class="view-product">
+								<img src="/get_product_picture/" alt="ecommerce website products" />
+							</div>
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information">
+								<img src="/static/images/product-details/new.jpg" class="newarrival" alt="ecommerce website products" />
+								<h2></h2>
+								<p>Category: </p>
+								<img src="/static/images/product-details/rating.png" alt="ecommerce website products" />
+								<span>
+									<span></span>
+									<label>Quantity:</label>
+									<input type="number" name="quantity" id="quantity" value="1" min="1" />
+									<input type="hidden" name="product_id" id="product_id" value="">
+									<button type="button" class="btn btn-default cart">
+										<i class="fa fa-shopping-cart"></i>
+										Add to cart
+									</button>
+								</span>
+								<p><b>Availability:</b> In Stock</p>

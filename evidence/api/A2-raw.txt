@@ -1,0 +1,23 @@
+# A2  captured 2026-10-30 13:56:22 +0530
+# curl -X POST -d search_product=zzzznotfound123 https://automationexercise.com/api/searchProduct
+
+HTTP/1.1 200 OK
+Date: Fri, 30 Oct 2026 08:27:15 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 37
+Connection: keep-alive
+vary: Accept,Cookie
+referrer-policy: same-origin
+x-frame-options: DENY
+x-content-type-options: nosniff
+allow: POST, DELETE, OPTIONS, PUT, GET
+x-powered-by: Phusion Passenger(R) 6.2.1
+status: 200 OK
+Server: cloudflare
+cf-cache-status: DYNAMIC
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=GKBZTT3DnxMSzIuqltklMaQMt%2BObDhjqT9PvGIamdw7TF0PA7%2BbpxmpLGdt7nDj5s61pqd%2BwfKq5A1C%2FwrTW7xqBY72wxKV715EhsvQD82lrLCsCz%2B7aoafORgXMkqlsEFTIQaCoBLsW"}]}
+CF-RAY: a5290a29d9896357-CMB
+alt-svc: h3=":443"; ma=86400
+
+{"responseCode": 200, "products": []}

@@ -1,0 +1,23 @@
+# A3  captured 2026-10-30 13:56:23 +0530
+# curl -X POST https://automationexercise.com/api/searchProduct
+
+HTTP/1.1 200 OK
+Date: Fri, 30 Oct 2026 08:27:15 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 101
+Connection: keep-alive
+vary: Accept,Cookie,Accept-Encoding
+referrer-policy: same-origin
+x-frame-options: DENY
+x-content-type-options: nosniff
+allow: POST, DELETE, OPTIONS, PUT, GET
+x-powered-by: Phusion Passenger(R) 6.2.1
+status: 200 OK
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=wjbNMYStWyaD%2FtbDpYg12JVWaso0YBB6trhISIsHEz5vtBavrlLhIhaYZTraOIYJsDWDcubLnMy6CdypXfqBZgIgIVkKdTHUkgbaGgo4mGoriKMmybm1c4vwFfkhhD%2FJfgTLIWKzFBBS"}]}
+Server: cloudflare
+cf-cache-status: DYNAMIC
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+CF-RAY: a5290a2d592cb300-CMB
+alt-svc: h3=":443"; ma=86400
+
+{"responseCode": 400, "message": "Bad request, search_product parameter is missing in POST request."}

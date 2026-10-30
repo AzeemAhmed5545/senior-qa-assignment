@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantity field - local demo</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 24px; color: #333; max-width: 720px; }
+  .note { background: #f5f5f5; padding: 10px 14px; font-size: 14px; }
+  .product-information { border: 1px solid #ddd; padding: 20px; margin: 16px 0; }
+  .product-information h2 { margin-top: 0; font-weight: normal; }
+  .price { color: #fe980f; font-size: 28px; font-weight: bold; margin-right: 16px; }
+  #quantity { width: 50px; font-size: 18px; padding: 4px; }
+  .cart { background: #f0f0e9; border: 0; padding: 8px 14px; font-size: 15px; cursor: pointer; }
+  #cartModal { display: none; border: 2px solid #5cb85c; padding: 10px; margin-top: 10px; }
+  #cartModal.show { display: block; }
+  #log { font-family: Consolas, monospace; font-size: 13px; background: #222; color: #9f9; padding: 10px; min-height: 60px; white-space: pre-wrap; }
+  #applyBtn { padding: 6px 12px; }
+</style>
+</head>
+<body>
+
+<h1>Quantity field - local demo</h1>
+<p class="note">
+  The product block below copies the markup of <code>automationexercise.com/product_details/1</code>.
+  The add-to-cart handler is a copy of the site's <code>cart.js</code> logic, but it writes the request it
+  <em>would</em> send to the log below instead of calling the server. The live site is not changed.
+</p>
+
+<p>
+  <button id="applyBtn" type="button">Apply improvement (improvement.js)</button>
+  <span id="state">State: <strong>BEFORE</strong> (original behaviour)</span>
+</p>
+
+<!-- Same markup as the live product page -->
+<div class="product-information">
+  <h2>Blue Top</h2>
+  <p>Category: Women &gt; Tops</p>
+  <span>
+    <span class="price">Rs. 500</span>
+    <label>Quantity:</label>
+    <input type="number" name="quantity" id="quantity" value="1" min="1">
+    <input type="hidden" name="product_id" id="product_id" value="1">
+    <button type="button" class="btn btn-default cart">Add to cart</button>
+  </span>
+  <div id="cartModal"><strong>Added!</strong> Your product has been added to cart.</div>
+</div>
+
+<h3>Requests that would be sent</h3>
+<div id="log"></div>
+
+<script>
+  // Stand-in for the site's cart.js: $('.cart').on('click', ...) sends quantity without checking it
+  document.querySelector('.cart').addEventListener('click', function () {
+    var product = document.getElementById('product_id').value;
+    var quantity = document.getElementById('quantity').value;
+    document.getElementById('log').textContent += 'GET /add_to_cart/' + product + '?quantity=' + quantity + '\n';
+    document.getElementById('cartModal').classList.add('show');
+    setTimeout(function () { document.getElementById('cartModal').classList.remove('show'); }, 1500);
+  });
+
+  document.getElementById('applyBtn').addEventListener('click', function () {
+    var s = document.createElement('script');
+    s.src = 'improvement.js';
+    document.body.appendChild(s);
+    this.disabled = true;
+    document.getElementById('state').innerHTML = 'State: <strong>AFTER</strong> (improvement applied)';
+  });
+</script>
+</body>
+</html>
