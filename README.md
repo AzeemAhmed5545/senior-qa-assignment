@@ -1,4 +1,4 @@
-# Senior QA Assignment — Automation Exercise
+# Senior QA Assignment - Automation Exercise
 
 QA review of **https://automationexercise.com** for the Senior QA Engineer assignment: customer
 journey, search API and full product catalogue.
